@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8dd04b59060a42c48b359c9819ce6296
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - floor: {fileID: 8852139173972243144, guid: 73dfe74e92e3a884198077e9887ef903, type: 3}
+  - wall: {fileID: 5741295723915501641, guid: e3cca8f4dae4bba4eacbb63b85b32b12, type: 3}
+  - ceiling: {fileID: 6893243003734482840, guid: 2ab5540e2cda73d48b2daf9fa5e3af2d, type: 3}
+  - background: {fileID: 6494472610749227189, guid: ad9f0a7153e46204aad682ec26b56caa, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
