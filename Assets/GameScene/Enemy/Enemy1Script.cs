@@ -10,6 +10,7 @@ public class Enemy1Script : MonoBehaviour
     private bool isBlock = false;
 
     public float powerEnemy = 1; //UŒ‚—Í
+    public float hp = 5; //‘Ì—Í
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,6 @@ public class Enemy1Script : MonoBehaviour
     {
         //Enemy1Move();
         //transform.Translate(new Vector3(0.01f, 0, 0));
-
     }
 
     private void OnTriggerEnter(Collider other)

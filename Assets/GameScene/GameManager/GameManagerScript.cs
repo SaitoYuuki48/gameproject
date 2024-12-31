@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public GameObject floor;
-    public GameObject wall;
-    public GameObject ceiling;
+    public GameObject floor; //1
+    public GameObject wall;  //2
+    public GameObject ceiling; //3
+    public GameObject airFloor; //4
+    public GameObject damageFloor; //5
+
     public GameObject background;
 
     public GameObject enemy1;
@@ -18,72 +22,77 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        map = new int[,]
-        {
-            {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0},
-            {2,0,0,0,0,0,0,0,0,2,2,0,0,0,9,0,0,0,2,0,0,0,0,0,0,0},
-            {2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        };
-
-        int lenY = map.GetLength(0);
-        int lenX = map.GetLength(1);
-
-        Vector3 position = Vector3.zero;
-
-        for (int y = 0; y < map.GetLength(0); y++)
-        {
-            for (int x = 0; x < map.GetLength(1); x++)
-            {
-                position.x = x;
-                position.y = -y + 5;
-                if (map[y, x] == 1)
-                {
-                    Instantiate(floor, position, Quaternion.identity);
-                }
-
-                if (map[y, x] == 2)
-                {
-                    Instantiate(wall, position, Quaternion.identity);
-                }
-
-                if (map[y, x] == 3)
-                {
-                    Instantiate(ceiling, position, Quaternion.identity);
-                }
-
-                if (map[y, x] == 9)
-                {
-                    Instantiate(enemy1, position, Quaternion.identity);
-                }
-            }
-        }
-
-        //”wŒi
-        for (int y = 0; y < lenY; y++)
-        {
-            for (int x = 0; x < lenX; x++)
-            {
-                position.x = x;
-                position.y = -y + 5;
-                position.z = 1;
-                Instantiate(background, position, Quaternion.identity);
-            }
-        }
+        LoadMap("map1");
     }
 
-    // Update is called once per frame
-    void Update()
+    void LoadMap(string fileName)
     {
-        
+        TextAsset csv = Resources.Load<TextAsset>(fileName);
+        if (csv == null)
+        {
+            Debug.LogError("CSV‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ: " + fileName);
+            return;
+        }
+        else
+        {
+            Debug.Log("CSV“Ç‚Ýž‚Ý¬Œ÷: " + fileName);
+        }
+
+        StringReader reader = new StringReader(csv.text);
+        int y = 0;
+
+        while (reader.Peek() > -1)
+        {
+            string line = reader.ReadLine();
+            string[] values = line.Split(',');
+
+            for (int x = 0; x < values.Length; x++)
+            {
+                int tileType = int.Parse(values[x]);
+                if (!int.TryParse(values[x], out tileType))
+                {
+                    Debug.LogWarning("–³Œø‚Èƒf[ƒ^: " + values[x] + " (X:" + x + " Y:" + y + ")");
+                    continue;
+                }
+                Vector3 position = new Vector3(x, 5 - y, 0);
+
+                //@‚P°@‚Q•Ç@‚R“Vˆä@‚S•‚‚¢‚Ä‚é°@‚Tƒ_ƒ[ƒW°@‚UðŒ‚Å•Â‚ß‚é@‚Q‚OŽ¸”s”»’è
+
+                switch (tileType)
+                {
+                    case 1:
+                        if (floor != null)
+                            Instantiate(floor, position, Quaternion.identity);
+                        break;
+                    case 2:
+                        if (wall != null)
+                            Instantiate(wall, position, Quaternion.identity);
+                        break;
+                    case 3:
+                        if (ceiling != null)
+                            Instantiate(ceiling, position, Quaternion.identity);
+                        break;
+                    case 4:
+                        if (airFloor != null)
+                            Instantiate(airFloor, position, Quaternion.identity);
+                        break;
+                    case 5:
+                        if (damageFloor != null)
+                            Instantiate(damageFloor, position, Quaternion.identity);
+                        break;
+                    case 10:
+                        if (enemy1 != null)
+                            Instantiate(enemy1, position, Quaternion.identity);
+                        break;
+                    default:
+                        Debug.LogWarning("–¢’è‹`‚Ìƒ^ƒCƒ‹ƒ^ƒCƒv: " + tileType);
+                        break;
+                }
+
+            }
+            y++;
+        }
+        Debug.Log("ƒ}ƒbƒv¶¬Š®—¹");
     }
+
 }

@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Floor
   - Ceiling
+  - AirFloor
   layers:
   - Default
   - TransparentFX
