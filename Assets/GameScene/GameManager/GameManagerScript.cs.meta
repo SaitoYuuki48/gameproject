@@ -8,8 +8,10 @@ MonoImporter:
   - wall: {fileID: 5741295723915501641, guid: e3cca8f4dae4bba4eacbb63b85b32b12, type: 3}
   - ceiling: {fileID: 6893243003734482840, guid: 2ab5540e2cda73d48b2daf9fa5e3af2d, type: 3}
   - airFloor: {instanceID: 0}
+  - damageFloor: {instanceID: 0}
   - background: {fileID: 6494472610749227189, guid: ad9f0a7153e46204aad682ec26b56caa, type: 3}
   - enemy1: {fileID: 5343356750565766870, guid: 8bf226d0712cfd54ba747ea3e274ca38, type: 3}
+  - enemy2: {fileID: 5613808221130790212, guid: 8ab00741a0b66b946a4b03c3b15d5e3e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

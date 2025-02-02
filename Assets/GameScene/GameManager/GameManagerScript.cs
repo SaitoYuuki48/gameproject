@@ -11,10 +11,12 @@ public class GameManagerScript : MonoBehaviour
     public GameObject ceiling; //3
     public GameObject airFloor; //4
     public GameObject damageFloor; //5
+    public GameObject goal;
 
     public GameObject background;
 
     public GameObject enemy1;
+    public GameObject enemy2;
 
     //配列の宣言
     int[,] map;
@@ -80,9 +82,17 @@ public class GameManagerScript : MonoBehaviour
                         if (damageFloor != null)
                             Instantiate(damageFloor, position, Quaternion.identity);
                         break;
+                    case 6:
+                        if (goal != null)
+                            Instantiate(goal, position, Quaternion.identity);
+                        break;
                     case 10:
                         if (enemy1 != null)
-                            Instantiate(enemy1, position, Quaternion.identity);
+                            Instantiate(enemy1, position + new Vector3(0,0.1f,0), Quaternion.identity);
+                        break;
+                    case 11:
+                        //if (enemy2 != null)
+                        //    Instantiate(enemy2, position, Quaternion.identity);
                         break;
                     default:
                         Debug.LogWarning("未定義のタイルタイプ: " + tileType);

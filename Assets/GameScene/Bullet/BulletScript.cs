@@ -19,28 +19,55 @@ public class BulletScript : MonoBehaviour
         rb.useGravity = false; //重力を無効にする
     }
 
-    void OnTriggerEnter(Collider collision)
+    //void OnTriggerEnter(Collider collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Floor")) //タグがBlockのオブジェクトと衝突した場合
+    //    {
+    //        Destroy(this.gameObject); //弾を消す
+    //    }
+
+    //    if (collision.gameObject.CompareTag("Wall")) //タグがBlockのオブジェクトと衝突した場合
+    //    {
+    //        Destroy(this.gameObject); //弾を消す
+    //    }
+
+    //    if (collision.gameObject.CompareTag("Ceiling")) //タグがBlockのオブジェクトと衝突した場合
+    //    {
+    //        Destroy(this.gameObject); //弾を消す
+    //    }
+
+    //    if (collision.gameObject.CompareTag("Enemy")) //タグがEnemyのオブジェクトと衝突した場合
+    //    {
+    //        //Destroy(collision.gameObject); //衝突した相手を消す
+    //        Destroy(this.gameObject); //弾を消す
+    //    }
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    // 衝突したオブジェクトがIDamageableを持っているか確認
+    //    IDamageable target = collision.gameObject.GetComponent<IDamageable>();
+
+    //    if (target != null)
+    //    {
+    //        // IDamageableがあればダメージを与える
+    //        target.TakeDamage();
+    //    }
+
+    //    // 弾は当たったら消える
+    //    Destroy(gameObject);
+    //}
+
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Floor")) //タグがBlockのオブジェクトと衝突した場合
+        IDamageable target = collision.gameObject.GetComponent<IDamageable>();
+
+        if (target != null)
         {
-            Destroy(this.gameObject); //弾を消す
+            target.TakeDamage();
         }
 
-        if (collision.gameObject.CompareTag("Wall")) //タグがBlockのオブジェクトと衝突した場合
-        {
-            Destroy(this.gameObject); //弾を消す
-        }
-
-        if (collision.gameObject.CompareTag("Ceiling")) //タグがBlockのオブジェクトと衝突した場合
-        {
-            Destroy(this.gameObject); //弾を消す
-        }
-
-        if (collision.gameObject.CompareTag("Enemy")) //タグがEnemyのオブジェクトと衝突した場合
-        {
-            Destroy(collision.gameObject); //衝突した相手を消す
-            Destroy(this.gameObject); //弾を消す
-        }
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

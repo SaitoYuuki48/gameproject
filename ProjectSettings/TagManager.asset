@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
   - Wall
-  - Floor
   - Ceiling
   - AirFloor
+  - Floor
+  - Enemy1
+  - Enemy2
   layers:
   - Default
   - TransparentFX
@@ -19,10 +20,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Enemy
+  - Invincible
+  - Player
   - 
   - 
   - 

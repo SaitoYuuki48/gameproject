@@ -19,7 +19,7 @@ public class PlayerCameraScript : MonoBehaviour
         var position = transform.position;
         position.x = playerPosition.x;
         position.y = playerPosition.y + 2;
-        position.z = playerPosition.z - 8;
+        position.z = playerPosition.z - 12;
         transform.position = position;
     }
 }
